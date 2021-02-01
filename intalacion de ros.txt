@@ -1,0 +1,46 @@
+	Configurar la computadora para aceptar paquetes de ros.org
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+
+	Configuramos las llaves
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+	Actualización del sistema
+sudo apt update
+
+	Instala ros melodic
+sudo apt install ros-melodic-desktop-full
+
+	Ver paquetes de ros disponibles
+apt search ros-melodic
+
+	Configura el entorno, para agregar las variables de entorno ros automáticamente
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+	Dependencias para la compilación de paquetes
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+
+	Instala rosdep, para instalar dependencias
+sudo apt install python-rosdep
+
+	Inicializa rosdep
+sudo rosdep init
+rosdep update
+
+	Crear espacio de trabajo 
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+
+	Comprobamos que se haya creado correctamente
+echo $ROS_PACKAGE_PATH
+
+	Instalar VSC
+git clone https://github.com/JetsonHacksNano/installVSCode.git
+cd installVSCode
+./installVSCode.sh
+
+
+
+
